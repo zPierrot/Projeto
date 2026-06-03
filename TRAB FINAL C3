@@ -213,43 +213,24 @@ Valor Total = Valor da Diária × Quantidade de Dias
  8. Menu Principal
 
 1. Cadastrar Cliente
-
 2. Listar Clientes
-
 3. Buscar Cliente
-
 4. Atualizar Cliente
-
 5. Remover Cliente
-
 6. Cadastrar Funcionário
-
 7. Listar Funcionários
-
 8. Buscar Funcionário
-
 9. Atualizar Funcionário
-
 10. Remover Funcionário
-
 11. Cadastrar Veículo
-
 12. Listar Veículos
-
 13. Consultar Disponibilidade
-
 14. Atualizar Veículo
-
 15. Remover Veículo
-
 16. Realizar Locação
-
 17. Registrar Devolução
-
 18. Listar Locações
-
 19. Salvar Dados
-
 20. Sair
 
 ---
@@ -291,89 +272,22 @@ Valor Total = Valor da Diária × Quantidade de Dias
 
 * SistemaLocadora
 
----
+ 11. REGRAS DE NEGÓCIOS 
 
- 11. Ferramenta de Gerenciamento
+ 7.1 Etapa de Cadastro
+Durante o processo de cadastro, o sistema deverá garantir a integridade e a consistência das informações armazenadas. Não será permitido cadastrar clientes com CPF duplicado, funcionários com CPF ou matrícula já existentes e veículos com placa repetida. Além disso, todos os dados obrigatórios deverão ser informados para que o cadastro seja concluído com sucesso.
 
-Será utilizado o Trello utilizando a metodologia Kanban para acompanhamento das atividades do projeto.
+ 7.2 Etapa de Locação
+Para realizar uma locação, o cliente deverá estar previamente cadastrado no sistema e o veículo escolhido deverá estar disponível para aluguel. Toda locação deverá estar associada a um funcionário responsável pelo atendimento e registro da operação. O sistema não permitirá locações com quantidade de dias igual ou inferior a zero, nem permitirá que um mesmo veículo participe de duas locações simultaneamente. Após a confirmação da locação, o veículo terá seu status alterado automaticamente para indisponível.
 
- Colunas
+ 7.3 Etapa de Cálculo da Locação
+O valor total da locação será calculado com base no valor da diária do veículo multiplicado pela quantidade de dias contratada. Caso existam cobranças adicionais decorrentes de atraso na devolução ou danos ao veículo, esses valores serão acrescentados ao valor final da locação.
 
-* Backlog
-* A Fazer
-* Em Desenvolvimento
-* Em Testes
-* Concluído
+ 7.4 Etapa de Devolução
+Ao registrar a devolução do veículo, o sistema deverá atualizar automaticamente sua disponibilidade para que possa ser alugado novamente. Caso a devolução ocorra após a data prevista, será aplicada uma multa correspondente ao valor de uma diária adicional para cada dia de atraso. Se forem identificados danos no veículo durante a vistoria, o funcionário responsável poderá registrar cobranças adicionais referentes aos custos de reparo ou manutenção.
 
----
+ 7.5 Etapa de Controle Financeiro
+Clientes que possuírem débitos pendentes, multas por atraso ou cobranças não quitadas não poderão realizar novas locações até que sua situação seja regularizada. Todas as cobranças realizadas deverão permanecer registradas para fins de consulta e controle financeiro da locadora.
 
- 12. Divisão de Tarefas
-
-| Integrante                             | Responsabilidade                             |
-| -------------------------------------- | -------------------------------------------- |
-| Riquelme Correa de Lima                | Documentação, UML e Trello                   |
-| Jeferson Lucas da Silva Almeida        | Cadastro de Clientes                         |
-| João Victor Moreira de Carvalho Rangel | Cadastro de Veículos                         |
-| Filipe Ferreira Stofel                 | Módulo de Locação e Persistência em Arquivos |
-| Equipe                                 | Cadastro de Funcionários e Integração Final  |
-
----
-
- 13. Diagrama de Classes (Versão inicial)
-
-
-                    Pessoa
-             -------------------
-             - nome
-             - cpf
-             - telefone
-             -------------------
-             + getters/setters
-             + toString()
-             + equals()
-
-                  ▲       ▲
-                  |       |
-                  |       |
-
-          Cliente         Funcionario
-       ----------------  ----------------
-       - codigoCliente   - matricula
-                         - cargo
-       ----------------  ----------------
-       + toString()      + toString()
-       + equals()        + equals()
-
-
-                Veiculo
-       -------------------------
-       - placa
-       - modelo
-       - marca
-       - ano
-       - valorDiaria
-       - disponivel
-       -------------------------
-       + getters/setters
-       + toString()
-       + equals()
-
-
-                Locacao
-       -------------------------
-       - cliente
-       - funcionario
-       - veiculo
-       - dataLocacao
-       - quantidadeDias
-       - valorTotal
-       -------------------------
-       + calcularValor()
-       + toString()
-       + equals()
-
-
-          SistemaLocadora
-       -------------------------
-       + menuPrincipal()
-       + executar()
+ 7.6 Etapa de Controle Operacional e Persistência
+Veículos que estiverem em manutenção ou apresentarem problemas mecânicos não poderão ser disponibilizados para locação até que sua situação seja regularizada. Todas as informações cadastradas e alterações realizadas deverão ser armazenadas em arquivos para garantir a persistência dos dados entre as execuções do sistema. Além disso, os registros de clientes, funcionários, veículos e locações poderão ser consultados, atualizados e removidos por meio das operações de CRUD (Create, Read, Update e Delete), mantendo o histórico e a consistência das informações do sistema.
