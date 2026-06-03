@@ -1,0 +1,218 @@
+# ESPECIFICAÇÃO DO SISTEMA
+
+## Projeto: Sistema de Locação de Carros
+
+### Integrantes
+
+* Riquelme Correa de Lima
+* Jeferson Lucas da Silva Almeida
+* João Victor Moreira de Carvalho Rangel
+* Filipe Ferreira Stofel
+
+### Disciplina
+
+Laboratório de Programação II
+
+### Professor
+
+Rober Marcone Rosi
+
+---
+
+## 1. Descrição do Sistema
+
+O Sistema de Locação de Carros tem como objetivo auxiliar uma locadora no controle de veículos, clientes e locações realizadas.
+
+O sistema permitirá o cadastro de clientes e veículos, a realização de locações, devoluções de veículos e consultas de informações cadastradas. Todos os dados serão armazenados em arquivos para que possam ser recuperados quando o sistema for executado novamente.
+
+O software será desenvolvido utilizando a linguagem Java e os conceitos de Programação Orientada a Objetos estudados durante a disciplina.
+
+---
+
+## 2. Objetivos
+
+* Cadastrar clientes.
+* Cadastrar veículos disponíveis para locação.
+* Realizar locações de veículos.
+* Registrar devoluções.
+* Consultar clientes, veículos e locações.
+* Salvar e recuperar dados em arquivos.
+
+---
+
+## 3. Funcionalidades do Sistema
+
+### Módulo Cliente
+
+* Cadastrar cliente.
+* Listar clientes.
+* Buscar cliente por CPF.
+* Atualizar dados do cliente.
+* Remover cliente.
+
+### Módulo Veículo
+
+* Cadastrar veículo.
+* Listar veículos.
+* Consultar disponibilidade.
+* Atualizar dados do veículo.
+* Remover veículo.
+
+### Módulo Locação
+
+* Registrar locação.
+* Registrar devolução.
+* Calcular valor total da locação.
+* Listar locações realizadas.
+
+---
+
+## 4. Estrutura Inicial de Classes
+
+### Classe Pessoa
+
+Atributos:
+
+* nome
+* cpf
+* telefone
+
+Métodos:
+
+* getters e setters
+* toString()
+* equals()
+
+### Classe Cliente (Herança de Pessoa)
+
+Atributos:
+
+* codigoCliente
+
+Métodos:
+
+* getters e setters
+* toString()
+* equals()
+
+### Classe Veiculo
+
+Atributos:
+
+* placa
+* modelo
+* marca
+* ano
+* valorDiaria
+* disponivel
+
+Métodos:
+
+* getters e setters
+* toString()
+* equals()
+
+### Classe Locacao
+
+Atributos:
+
+* cliente
+* veiculo
+* dataLocacao
+* quantidadeDias
+* valorTotal
+
+Métodos:
+
+* calcularValor()
+* toString()
+* equals()
+
+### Classe SistemaLocadora
+
+Responsável pelo menu principal e gerenciamento das operações do sistema.
+
+---
+
+## 5. Conceitos de POO Utilizados
+
+* Classes e Objetos
+* Encapsulamento
+* Herança (Pessoa → Cliente)
+* Polimorfismo (caso seja implementado futuramente)
+* Coleções (ArrayList)
+* Tratamento de Exceções
+* Persistência de Dados em Arquivos
+
+---
+
+## 6. Armazenamento de Dados
+
+Os dados serão armazenados em arquivos utilizando serialização ou arquivos texto, permitindo que o sistema mantenha as informações mesmo após ser encerrado.
+
+Arquivos previstos:
+
+* clientes.dat
+* veiculos.dat
+* locacoes.dat
+
+---
+
+## 7. Menu Principal
+
+1. Cadastrar Cliente
+2. Listar Clientes
+3. Cadastrar Veículo
+4. Listar Veículos
+5. Realizar Locação
+6. Registrar Devolução
+7. Listar Locações
+8. Salvar Dados
+9. Sair
+
+---
+
+## 8. Requisitos Não Funcionais
+
+* Interface em modo texto (console).
+* Fácil utilização.
+* Código organizado em pacotes.
+* Comentários nas classes e métodos.
+* Tratamento de entradas inválidas.
+
+---
+
+## 9. Organização dos Pacotes
+
+locadora.model
+
+* Pessoa
+* Cliente
+* Veiculo
+* Locacao
+
+locadora.service
+
+* GerenciadorLocacoes
+
+locadora.persistence
+
+* ArquivoUtil
+
+locadora.main
+
+* SistemaLocadora
+
+---
+
+## 10. Ferramenta de Gerenciamento
+
+Será utilizado o Trello com metodologia Kanban para acompanhamento das atividades do projeto.
+
+Colunas:
+
+* Backlog
+* A Fazer
+* Em Desenvolvimento
+* Em Testes
+* Concluído
