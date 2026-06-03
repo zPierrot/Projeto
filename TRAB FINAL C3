@@ -1,48 +1,49 @@
-# ESPECIFICAÇÃO DO SISTEMA
+ ESPECIFICAÇÃO DO SISTEMA
 
-## Projeto: Sistema de Locação de Carros
+ Projeto: Sistema de Locação de Carros
 
-### Integrantes
+ Integrantes
 
 * Riquelme Correa de Lima
 * Jeferson Lucas da Silva Almeida
 * João Victor Moreira de Carvalho Rangel
 * Filipe Ferreira Stofel
 
-### Disciplina
+ Disciplina
 
 Laboratório de Programação II
 
-### Professor
+ Professor
 
 Rober Marcone Rosi
 
 ---
 
-## 1. Descrição do Sistema
+ 1. Descrição do Sistema
 
-O Sistema de Locação de Carros tem como objetivo auxiliar uma locadora no controle de veículos, clientes e locações realizadas.
+O Sistema de Locação de Carros tem como objetivo auxiliar uma locadora no controle de clientes, funcionários, veículos e locações realizadas.
 
-O sistema permitirá o cadastro de clientes e veículos, a realização de locações, devoluções de veículos e consultas de informações cadastradas. Todos os dados serão armazenados em arquivos para que possam ser recuperados quando o sistema for executado novamente.
+O sistema permitirá o cadastro de clientes, funcionários e veículos, além da realização de locações, devoluções e consultas de informações cadastradas. Todos os dados serão armazenados em arquivos para que possam ser recuperados quando o sistema for executado novamente.
 
 O software será desenvolvido utilizando a linguagem Java e os conceitos de Programação Orientada a Objetos estudados durante a disciplina.
 
 ---
 
-## 2. Objetivos
+ 2. Objetivos
 
 * Cadastrar clientes.
+* Cadastrar funcionários.
 * Cadastrar veículos disponíveis para locação.
 * Realizar locações de veículos.
 * Registrar devoluções.
-* Consultar clientes, veículos e locações.
+* Consultar clientes, funcionários, veículos e locações.
 * Salvar e recuperar dados em arquivos.
 
 ---
 
-## 3. Funcionalidades do Sistema
+ 3. Funcionalidades do Sistema
 
-### Módulo Cliente
+ Módulo Cliente
 
 * Cadastrar cliente.
 * Listar clientes.
@@ -50,7 +51,15 @@ O software será desenvolvido utilizando a linguagem Java e os conceitos de Prog
 * Atualizar dados do cliente.
 * Remover cliente.
 
-### Módulo Veículo
+ Módulo Funcionário
+
+* Cadastrar funcionário.
+* Listar funcionários.
+* Buscar funcionário por CPF ou matrícula.
+* Atualizar dados do funcionário.
+* Remover funcionário.
+
+ Módulo Veículo
 
 * Cadastrar veículo.
 * Listar veículos.
@@ -58,46 +67,66 @@ O software será desenvolvido utilizando a linguagem Java e os conceitos de Prog
 * Atualizar dados do veículo.
 * Remover veículo.
 
-### Módulo Locação
+ Módulo Locação
 
 * Registrar locação.
 * Registrar devolução.
 * Calcular valor total da locação.
 * Listar locações realizadas.
+* Consultar histórico de locações.
 
 ---
 
-## 4. Estrutura Inicial de Classes
+ 4. Estrutura de Classes
 
-### Classe Pessoa
+ Classe Pessoa
 
-Atributos:
+ Atributos
 
 * nome
 * cpf
 * telefone
 
-Métodos:
+ Métodos
 
 * getters e setters
 * toString()
 * equals()
 
-### Classe Cliente (Herança de Pessoa)
+---
 
-Atributos:
+ Classe Cliente (Herança de Pessoa)
+
+ Atributos
 
 * codigoCliente
 
-Métodos:
+ Métodos
 
 * getters e setters
 * toString()
 * equals()
 
-### Classe Veiculo
+---
 
-Atributos:
+ Classe Funcionario (Herança de Pessoa)
+
+ Atributos
+
+* matricula
+* cargo
+
+ Métodos
+
+* getters e setters
+* toString()
+* equals()
+
+---
+
+ Classe Veiculo
+
+ Atributos
 
 * placa
 * modelo
@@ -106,113 +135,245 @@ Atributos:
 * valorDiaria
 * disponivel
 
-Métodos:
+ Métodos
 
 * getters e setters
 * toString()
 * equals()
 
-### Classe Locacao
+---
 
-Atributos:
+ Classe Locacao
+
+ Atributos
 
 * cliente
+* funcionario
 * veiculo
 * dataLocacao
 * quantidadeDias
 * valorTotal
 
-Métodos:
+ Métodos
 
 * calcularValor()
 * toString()
 * equals()
 
-### Classe SistemaLocadora
+---
+
+ Classe SistemaLocadora
 
 Responsável pelo menu principal e gerenciamento das operações do sistema.
 
 ---
 
-## 5. Conceitos de POO Utilizados
+ 5. Conceitos de POO Utilizados
 
 * Classes e Objetos
 * Encapsulamento
-* Herança (Pessoa → Cliente)
-* Polimorfismo (caso seja implementado futuramente)
+* Herança (Pessoa → Cliente e Pessoa → Funcionario)
+* Polimorfismo (possível implementação futura)
+* Sobrescrita de métodos
 * Coleções (ArrayList)
 * Tratamento de Exceções
 * Persistência de Dados em Arquivos
 
 ---
 
-## 6. Armazenamento de Dados
+ 6. Armazenamento de Dados
 
-Os dados serão armazenados em arquivos utilizando serialização ou arquivos texto, permitindo que o sistema mantenha as informações mesmo após ser encerrado.
+Os dados serão armazenados em arquivos utilizando serialização de objetos ou arquivos texto, permitindo que as informações permaneçam salvas mesmo após o encerramento do sistema.
 
-Arquivos previstos:
+ Arquivos Utilizados
 
 * clientes.dat
+* funcionarios.dat
 * veiculos.dat
 * locacoes.dat
 
 ---
 
-## 7. Menu Principal
+ 7. Regras de Negócio
 
-1. Cadastrar Cliente
-2. Listar Clientes
-3. Cadastrar Veículo
-4. Listar Veículos
-5. Realizar Locação
-6. Registrar Devolução
-7. Listar Locações
-8. Salvar Dados
-9. Sair
+1. Um cliente só poderá alugar veículos cadastrados.
+2. Um veículo só poderá ser alugado se estiver disponível.
+3. Após a locação, o veículo ficará indisponível.
+4. Após a devolução, o veículo voltará a ficar disponível.
+5. O valor total da locação será calculado pela fórmula:
+
+Valor Total = Valor da Diária × Quantidade de Dias
+
+6. Não será permitido cadastrar clientes ou funcionários com CPF duplicado.
+7. Não será permitido cadastrar veículos com placa duplicada.
+8. Toda locação deverá estar associada a um funcionário responsável.
 
 ---
 
-## 8. Requisitos Não Funcionais
+ 8. Menu Principal
+
+1. Cadastrar Cliente
+
+2. Listar Clientes
+
+3. Buscar Cliente
+
+4. Atualizar Cliente
+
+5. Remover Cliente
+
+6. Cadastrar Funcionário
+
+7. Listar Funcionários
+
+8. Buscar Funcionário
+
+9. Atualizar Funcionário
+
+10. Remover Funcionário
+
+11. Cadastrar Veículo
+
+12. Listar Veículos
+
+13. Consultar Disponibilidade
+
+14. Atualizar Veículo
+
+15. Remover Veículo
+
+16. Realizar Locação
+
+17. Registrar Devolução
+
+18. Listar Locações
+
+19. Salvar Dados
+
+20. Sair
+
+---
+
+ 9. Requisitos Não Funcionais
 
 * Interface em modo texto (console).
 * Fácil utilização.
 * Código organizado em pacotes.
 * Comentários nas classes e métodos.
 * Tratamento de entradas inválidas.
+* Baixo consumo de recursos.
+* Persistência de dados local.
 
 ---
 
-## 9. Organização dos Pacotes
+ 10. Organização dos Pacotes
 
-locadora.model
+ locadora.model
 
 * Pessoa
 * Cliente
+* Funcionario
 * Veiculo
 * Locacao
 
-locadora.service
+ locadora.service
 
+* GerenciadorClientes
+* GerenciadorFuncionarios
+* GerenciadorVeiculos
 * GerenciadorLocacoes
 
-locadora.persistence
+ locadora.persistence
 
 * ArquivoUtil
 
-locadora.main
+ locadora.main
 
 * SistemaLocadora
 
 ---
 
-## 10. Ferramenta de Gerenciamento
+ 11. Ferramenta de Gerenciamento
 
-Será utilizado o Trello com metodologia Kanban para acompanhamento das atividades do projeto.
+Será utilizado o Trello utilizando a metodologia Kanban para acompanhamento das atividades do projeto.
 
-Colunas:
+ Colunas
 
 * Backlog
 * A Fazer
 * Em Desenvolvimento
 * Em Testes
 * Concluído
+
+---
+
+ 12. Divisão de Tarefas
+
+| Integrante                             | Responsabilidade                             |
+| -------------------------------------- | -------------------------------------------- |
+| Riquelme Correa de Lima                | Documentação, UML e Trello                   |
+| Jeferson Lucas da Silva Almeida        | Cadastro de Clientes                         |
+| João Victor Moreira de Carvalho Rangel | Cadastro de Veículos                         |
+| Filipe Ferreira Stofel                 | Módulo de Locação e Persistência em Arquivos |
+| Equipe                                 | Cadastro de Funcionários e Integração Final  |
+
+---
+
+ 13. Diagrama de Classes (Versão inicial)
+
+
+                    Pessoa
+             -------------------
+             - nome
+             - cpf
+             - telefone
+             -------------------
+             + getters/setters
+             + toString()
+             + equals()
+
+                  ▲       ▲
+                  |       |
+                  |       |
+
+          Cliente         Funcionario
+       ----------------  ----------------
+       - codigoCliente   - matricula
+                         - cargo
+       ----------------  ----------------
+       + toString()      + toString()
+       + equals()        + equals()
+
+
+                Veiculo
+       -------------------------
+       - placa
+       - modelo
+       - marca
+       - ano
+       - valorDiaria
+       - disponivel
+       -------------------------
+       + getters/setters
+       + toString()
+       + equals()
+
+
+                Locacao
+       -------------------------
+       - cliente
+       - funcionario
+       - veiculo
+       - dataLocacao
+       - quantidadeDias
+       - valorTotal
+       -------------------------
+       + calcularValor()
+       + toString()
+       + equals()
+
+
+          SistemaLocadora
+       -------------------------
+       + menuPrincipal()
+       + executar()
